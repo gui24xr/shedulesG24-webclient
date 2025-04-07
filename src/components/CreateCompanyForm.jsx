@@ -1,17 +1,31 @@
 import React from 'react';
 import styles from "./styles/FormsStyle.module.css";
-import useProfileStore from '../store/useProfileStore';
+import useCompaniesStore from '../store/useCompaniesStore';
+import Alert from 'antd/es/alert/Alert';
+import { useNavigate } from 'react-router-dom';
 
 const CreateCompanyForm = () => {
 
-    const {createCompany} = useProfileStore()
+    const {createCompany} = useCompaniesStore()
+    const navigate = useNavigate()
+
     const handleSubmit = (event) =>{
         event.preventDefault()
         const formData = new FormData(event.target)
         const formValues = Object.fromEntries(formData.entries())
          console.log(formValues)
-         //sendDataToServer(formValues)
-        createCompany(formValues)
+       
+        createCompany({
+          data:formValues,
+          onSuccess: (response) =>{
+            <Alert message="Empresa creada satisfactoriamente" type="info" onClose={navigate('/dashboard')} />
+             
+          },
+          onError: ()=>{
+            alert('Error al intentar crear una empresa...')
+          }
+        
+        })
     }
     return (
     <div className={styles.container}>
@@ -45,6 +59,11 @@ const CreateCompanyForm = () => {
               <div className={styles.formGroup}>
                 <label for="nombreMedico">Departamento:</label>
                 <input type="text" id="apartment" name="apartment" required />
+              </div>
+
+              <div className={styles.formGroup}>
+                <label for="nombreMedico">Ciudad:</label>
+                <input type="text" id="postalCode" name="city" required />
               </div>
 
               <div className={styles.formGroup}>

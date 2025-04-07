@@ -4,14 +4,14 @@ import { apiClient } from "../config/apiclient";
 const useProfileStore = create((set, get) => ({
   currentUser: null,
   isAutenticated: false,
-  loading: true,
+  loading: false,
   error: null,
 
-  loginUserInServer: async ({auth0Token,onSuccess})=>{
+  loginOwnerInServer: async ({auth0Token,onSuccess, onFailure})=>{
     console.log('Token adentro de login nuevo: ', auth0Token)
     try {
-      const response = await apiClient.post(
-        "/api/auth/login",
+
+      const response = await apiClient.post("/api/auth/owners/login-or-register",
         {},
         {
           headers: {
@@ -28,6 +28,7 @@ const useProfileStore = create((set, get) => ({
       if (onSuccess) onSuccess()
     } catch (error) {
       console.error(error);
+      if (onFailure) onFailure()
     }
   },
 

@@ -6,6 +6,23 @@ import { useAuth0 } from '@auth0/auth0-react';
 const NavBar = () => {
     const { user, loginWithRedirect, logout } =
     useAuth0();
+
+    const loginAsOwner = () => {
+        loginWithRedirect({
+          authorizationParams: {
+            redirect_uri: `${window.location.origin}/owner/dashboard`,
+          },
+        });
+      };
+      
+      const loginAsEmployee = () => {
+        loginWithRedirect({
+          authorizationParams: {
+            redirect_uri: `${window.location.origin}/employee/dashboard`,
+          },
+        });
+      };
+
     return (
         <nav className={styles.navbar}>
             <div className={styles.logo}>
@@ -20,9 +37,15 @@ const NavBar = () => {
                         </button>
                     </>
                 ) : (
-                    <button className={styles.loginButton} onClick={loginWithRedirect}>
-                        Login
-                    </button>
+                    <>
+                         <button className={styles.loginButton} onClick={loginAsOwner}>
+                            Login as Owner
+                        </button>
+                        <button className={styles.loginButton} onClick={loginAsEmployee}>
+                            Login as Employee
+                        </button>
+                    </>
+                   
                 )}
             </div>
         </nav>

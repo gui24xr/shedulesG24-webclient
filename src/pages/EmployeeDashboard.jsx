@@ -1,20 +1,18 @@
 import React,{useState,useEffect} from 'react';
 import useProfileStore from '../store/useProfileStore';
-import { CreateCompanyForm, CompaniesContainer } from '../components';
 
 
-const Dashboard = () => {
+const EmployeeDashboard = () => {
     const {currentUser,isAutenticated,loading,error} = useProfileStore()
    
 
     return (
         <div>
-            <h1>DASHBOARD</h1>
-            <CompaniesContainer/>
+            <h1>Employee DASHBOARD</h1>
             
             
         </div>
     );
 }
 
-export default Dashboard;
+export default EmployeeDashboard;
