@@ -1,0 +1,127 @@
+/* Form Container */
+.forms {
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 2.5rem;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.forms:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.12);
+}
+
+/* Título */
+.forms h1 {
+    color: #1a1a1a;
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+/* Todos los elementos dentro del form */
+.forms > * {
+    margin-bottom: 1.5rem;
+}
+
+.forms label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: #2d3748;
+    font-size: 0.95rem;
+    letter-spacing: 0.2px;
+}
+
+.forms input,
+.forms select,
+.forms textarea {
+    width: 100%;
+    padding: 0.85rem 1rem;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background-color: #f8fafc;
+}
+
+.forms input:focus,
+.forms select:focus,
+.forms textarea:focus {
+    outline: none;
+    border-color: #4a90e2;
+    box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+    background-color: #ffffff;
+}
+
+.forms textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+.forms button {
+    width: 100%;
+    padding: 1rem 1.5rem;
+    background-color: #4a90e2;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.forms button:hover {
+    background-color: #357abd;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(74, 144, 226, 0.2);
+}
+
+.forms button:active {
+    transform: translateY(0);
+}
+
+.forms button:disabled {
+    background-color: #cbd5e0;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+/* Error States */
+.forms .error {
+    color: #e53e3e;
+    font-size: 0.85rem;
+    margin-top: 0.25rem;
+    font-weight: 500;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .forms {
+        margin: 1rem;
+        padding: 1.5rem;
+    }
+    
+    .forms h1 {
+        font-size: 1.5rem;
+    }
+    
+    .forms input,
+    .forms select,
+    .forms textarea {
+        font-size: 16px;
+        padding: 0.75rem;
+    }
+    
+    .forms button {
+        padding: 0.85rem;
+    }
+}

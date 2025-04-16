@@ -1,0 +1,11 @@
+.dashboardHome {
+    width: 100%;
+    padding: 24px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .dashboardHome {
+        padding: 16px;
+    }
+} 

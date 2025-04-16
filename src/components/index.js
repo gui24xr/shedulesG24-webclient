@@ -1,11 +1,18 @@
-import BookingForm from "./BookingForm";
 import NavBar from "./Navbar";
-import CreateCompanyForm from "./CreateCompanyForm";
-import CompaniesContainer from "./CompaniesContainer";
-
+import OwnerProfileForm from "./OwnerProfileForm";
+import HeaderUserInfo from "./HeaderUserInfo";
+import AddressForm from "./AddressForm";
+import RapidActionsPanel from "./RapidActionsPanel";
+import RapidStaticsPanel from "./RapidStaticsPanel";
+import DashboardHome from "./DashboardHome";
+import CreateEstablishment from "./CreateEstablishment";
 export {
-     BookingForm,
      NavBar,
-     CreateCompanyForm,
-     CompaniesContainer
+     OwnerProfileForm,
+     HeaderUserInfo,
+     AddressForm,
+     RapidActionsPanel,
+     RapidStaticsPanel,
+     DashboardHome,
+     CreateEstablishment
 }

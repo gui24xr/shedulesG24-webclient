@@ -1,0 +1,133 @@
+.dashboardContainer {
+    width: 100%;
+    padding: 24px;
+    background-color: #f0f2f5;
+    min-height: 100vh;
+    box-sizing: border-box;
+}
+
+.headerCard {
+    width: 100%;
+    margin-bottom: 24px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.userAvatar {
+    background-color: #1890ff;
+    font-size: 24px;
+}
+
+.statsRow {
+    margin-bottom: 24px;
+}
+
+.statsRow .ant-col {
+    padding: 0 !important;
+}
+
+.statCard {
+    width: 100%;
+    text-align: center;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.statCard:hover {
+    transform: translateY(-5px);
+}
+
+.statIcon {
+    font-size: 24px;
+    color: #1890ff;
+}
+
+.actionsCard {
+    width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.actionButton {
+    width: 100%;
+    height: auto;
+    padding: 16px;
+    border-radius: 8px;
+    text-align: left;
+    display: flex;
+    align-items: flex-start;
+    transition: all 0.3s ease;
+    border: 1px solid #e2e8f0;
+    background-color: #f8fafc;
+}
+
+.actionButton:hover {
+    background-color: #ffffff;
+    border-color: #4a90e2;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(74, 144, 226, 0.1);
+}
+
+.actionButton .anticon {
+    font-size: 24px;
+    margin-right: 12px;
+    color: #4a90e2;
+}
+
+.actionTitle {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #1a1a1a;
+    margin-bottom: 4px;
+}
+
+.actionDescription {
+    font-size: 0.85rem;
+    color: #64748b;
+}
+
+/* Rapid Actions Panel */
+.rapidActionsCard {
+    margin-bottom: 24px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+}
+
+.rapidActionsCard:hover {
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+}
+
+.panelTitle {
+    margin-bottom: 24px !important;
+    color: #1a1a1a;
+    font-weight: 600 !important;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .dashboardContainer {
+        padding: 16px;
+    }
+
+    .statsRow {
+        margin-bottom: 16px;
+    }
+
+    .statCard {
+        margin-bottom: 16px;
+    }
+
+    .actionButton {
+        padding: 12px;
+    }
+    
+    .actionTitle {
+        font-size: 0.9rem;
+    }
+    
+    .actionDescription {
+        font-size: 0.8rem;
+    }
+} 

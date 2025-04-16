@@ -1,4 +1,13 @@
-.layout{
-    padding: 30px 400px;
-    background-color: rgb(204, 204, 204);
+.layout {
+    width: 100%;
+    min-height: calc(100vh - 60px); /* Ajustar según la altura de tu navbar */
+    background-color: #f0f2f5;
+    box-sizing: border-box;
+}
+
+/* Si necesitas un contenedor interno con ancho máximo */
+.layout > div {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 24px;
 }

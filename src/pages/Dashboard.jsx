@@ -1,19 +1,23 @@
-import React,{useState,useEffect} from 'react';
-import useProfileStore from '../store/useProfileStore';
-import { CreateCompanyForm, CompaniesContainer } from '../components';
+import React from 'react';
+import { HeaderUserInfo, RapidActionsPanel, RapidStaticsPanel } from '../components';
+import { Card, Row, Col, Avatar, Typography, Space, Button } from 'antd';
 
+import useProfileStore from '../store/useProfileStore';
+import styles from '../components/styles/Dashboard.module.css';
+
+const { Title, Text } = Typography;
 
 const Dashboard = () => {
-    const {currentUser,isAutenticated,loading,error} = useProfileStore()
-   
+    const {currentUser} = useProfileStore();
 
     return (
-        <div>
-            <h1>DASHBOARD</h1>
-            <CompaniesContainer/>
-            
-            
-        </div>
+       
+            <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+                <HeaderUserInfo currentUser={currentUser}/>
+                <RapidStaticsPanel />
+                <RapidActionsPanel />
+            </div>
+        
     );
 }
 
