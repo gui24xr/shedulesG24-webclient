@@ -1,26 +1,29 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
-import Layout from "./layout/layout.jsx";
-import DashboardLayout from "./layout/DashboardLayout.jsx";
+import { HomeLayout, EstablishmentsLayout, OwnersDashboardLayout } from "./layouts/index.js";
 import {Home} from "./pages/index.js";
-import { OwnerProfileForm, AddressForm, DashboardHome, CreateEstablishment } from "./components/index.js";
+
 
 function App() {
   return (
     <>
       <Routes>
-        {/* Rutas públicas */}
-        <Route path="/" element={<Layout />}>
-          <Route index element={<Home/>} />
+        {/* Home */}
+        <Route path="/" element={<HomeLayout />}>
+          <Route index element={<h1>Home</h1>} />
         </Route>
         
-        {/* Rutas del Dashboard */}
-        <Route path="/dashboard" element={<DashboardLayout />}>
-          <Route index element={<DashboardHome />} />
-          <Route path="profile" element={<OwnerProfileForm />} />
-          <Route path="address" element={<AddressForm />} />
-          <Route path="establishment/new" element={<CreateEstablishment />} />
+        
+        {/* Owners Dashboard */}
+        <Route path="/owners" element={<OwnersDashboardLayout />}>
+          <Route index element={<h1>Dashboard</h1>} />
+          <Route path="profile" element={<h1>Profile</h1>} />
+          <Route path="address" element={<h1>Address</h1>} />
+          <Route path="establishment/new" element={<h1>New Establishment</h1>} />
         </Route>
+
+       
+       
       </Routes>
     </>
   );
