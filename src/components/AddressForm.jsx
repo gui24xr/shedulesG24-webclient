@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import { useForm } from 'react-hook-form';
 import styles from './styles/Forms.module.css';
-import apiClient from '../config/apiclient';
+import apiClient from '../libs/apiclient';
 import useProfileStore from '../store/useProfileStore';
 
 function AddressForm() {

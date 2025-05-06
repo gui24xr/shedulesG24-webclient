@@ -14,6 +14,7 @@
     "@auth0/auth0-spa-js": "^2.1.3",
     "antd": "^5.24.6",
     "axios": "^1.7.9",
+    "loglevel": "^1.9.2",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-hook-form": "^7.55.0",

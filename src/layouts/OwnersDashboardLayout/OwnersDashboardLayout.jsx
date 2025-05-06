@@ -5,12 +5,15 @@ import { NavBar } from '../../components/index.js';
 import SideMenu from './SideMenu.jsx'
 
 
-const { Content } = Layout;
+const { Content,Sider } = Layout;
 
 export default function OwnersDashboardLayout() {
     return (
         <Layout >
-            <SideMenu />
+            <Sider>
+                <SideMenu />
+            </Sider>
+           
             <Layout >
                 <NavBar />
                 <Content >

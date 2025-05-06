@@ -6,11 +6,11 @@ import { Outlet, Link } from 'react-router-dom';
 
 const { Content, Header } = Layout;
 
-export default function HomeLayout() {
+export default function EstablishmentsDashboardLayout() {
   return (
     <Layout style={{ minHeight: '100vh' }}>
       
-        <NavBar />
+       <h1>Establishments Dashboard Layout</h1>
     
 
       <Content>

@@ -1,5 +1,5 @@
 import { create } from 'zustand'
-import apiClient from '../config/apiclient'
+import apiClient from '../libs/apiclient'
 
 const useCatalogsStore = create((set,get) => ({
     establishmentsCategories: {loaded: false, data: []},

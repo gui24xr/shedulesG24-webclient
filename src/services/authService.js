@@ -1,8 +1,29 @@
-import axios from 'axios';
-
+import { apiClient, loglevel } from "../libs/index"
 const API_URL = import.meta.env.VITE_API_URL;
 
 export const authService = {
+
+
+    async loginOrRegisterOwner(auth0Token){
+        const {data} = await apiClient.post(`${API_URL}/auth/owners/login-or-register`,
+            {},
+            {
+                headers: {
+                    Authorization: `Bearer ${auth0Token}`
+                }
+            }
+        )
+        return data
+    },
+
+    asyncupdateOwnerProfile(data){
+        const {data} = await apiClient.put(`${API_URL}/api/owners`, data)
+        return data
+    },
+
+
+
+    //----------------------------------------------------------------
     async login(credentials) {
         const response = await axios.post(`${API_URL}/auth/login`, credentials);
         return response.data;

@@ -1,8 +1,10 @@
-import Home from "./Home";
-import Dashboard from "./Dashboard";
+import HomeIndex from "./HomeIndex";
+import OwnersDashboard from "./OwnersDashboard";
+import EstablishmentsDashboardIndex from "./EstablishmentsDashboardIndex";
 
 
 export {
-    Home,
-    Dashboard,
+    HomeIndex,
+    OwnersDashboard,
+    EstablishmentsDashboardIndex
 }

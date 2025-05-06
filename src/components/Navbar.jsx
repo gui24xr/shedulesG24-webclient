@@ -1,19 +1,20 @@
 import React from 'react';
 import styles from './styles/NavBar.module.css'; 
 import { useAuth0 } from '@auth0/auth0-react';
-import useProfileStore from '../store/useProfileStore';
+import { useProfileStore } from '../store/index';
+import { Button } from 'antd';
+import { LogoutWrapper } from './index';
+
 const NavBar = () => {
-      const {currentUser,logoutUserInStoreAndServer} = useProfileStore()
-      const { loginWithRedirect,logout:logoutInClient } = useAuth0();
+    
+      const currentUser = useProfileStore((state) => state.currentUser)
+      const { loginWithRedirect} = useAuth0();
    
       const loginAsOwner = () => {
         loginWithRedirect();
       };
       
-      const logoutUserFromServerAndClient = () =>{
-        logoutUserInStoreAndServer({onSuccess: logoutInClient()})
-      }
-
+   
     return (
         <nav className={styles.navbar}>
             <div className={styles.logo}>
@@ -23,9 +24,12 @@ const NavBar = () => {
                 {currentUser ? (
                     <>
                         <span className={styles.userEmail}>{currentUser.email}</span>
-                        <button className={styles.logoutButton} onClick={logoutUserFromServerAndClient}>
-                            Logout
-                        </button>
+                       <LogoutWrapper>
+                         {(showConfirm) => (
+                            <Button type="primary" danger onClick={showConfirm}>Logout</Button>
+                         )}
+                       </LogoutWrapper>
+                        
                     </>
                 ) : (
                     <>

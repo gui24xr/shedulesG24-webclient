@@ -4,7 +4,6 @@ import { authService } from '../services/authService';
 import { useProfileStore } from './ProfileStore';
 
 export const useAuthStore = create(
-    persist(
         (set, get) => ({
             token: null,
             isAuthenticated: false,
@@ -40,8 +39,5 @@ export const useAuthStore = create(
             
             clearError: () => set({ error: null }),
         }),
-        {
-            name: 'auth-storage',
-        }
-    )
+      
 ); 

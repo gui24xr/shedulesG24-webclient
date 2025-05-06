@@ -6,6 +6,11 @@ import RapidActionsPanel from "./RapidActionsPanel";
 import RapidStaticsPanel from "./RapidStaticsPanel";
 import DashboardHome from "./DashboardHome";
 import CreateEstablishment from "./CreateEstablishment";
+import LogoutWrapper from "./LogoutWrapper";
+import EstablishmentsContainer from "./EstablishmentsContainer";
+import EstablishmentCard from "./EstablishmentCard";
+import EstablishmentDetailContainer from "./EstablishmentDetailContainer";
+import EstablishmentDetail from "./EstablishmentDetail";
 export {
      NavBar,
      OwnerProfileForm,
@@ -14,5 +19,10 @@ export {
      RapidActionsPanel,
      RapidStaticsPanel,
      DashboardHome,
-     CreateEstablishment
+     CreateEstablishment,
+     LogoutWrapper,
+     EstablishmentsContainer,
+     EstablishmentCard,
+     EstablishmentDetailContainer,
+     EstablishmentDetail
 }

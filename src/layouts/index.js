@@ -1,5 +1,5 @@
 import HomeLayout from './HomeLayout/HomeLayout.jsx';
-import EstablishmentsLayout from './EstablishmentsDashboardLayout/EstablishmentsLayout.jsx';
+import EstablishmentsDashboardLayout from './EstablishmentsDashboardLayout/EstablishmentsDashboardLayout.jsx';
 import OwnersDashboardLayout from './OwnersDashboardLayout/OwnersDashboardLayout.jsx';
 
-export { HomeLayout, EstablishmentsLayout, OwnersDashboardLayout };
+export { HomeLayout, EstablishmentsDashboardLayout, OwnersDashboardLayout };
