@@ -1,5 +1,6 @@
 import { create } from 'zustand'
 import { platformService } from '../services/index'
+import { PlatformServiceError } from '../services/errors/PlatformServiceError'
 
 
 //ESTABLISHMENTS STORE guillermo
@@ -71,7 +72,16 @@ const useEstablishmentsStore = create((set,get) => ({
                 data: {...data, loaded: true, items: establishments}
             })
         } catch (error) {
-            set({loading: false, error: error})
+            if (error instanceof PlatformServiceError && error.isRefreshTokenExpired) {
+                // Aquí podrías disparar una acción para cerrar sesión
+                set({loading: false, error: new Error('Sesión expirada. Por favor, vuelva a iniciar sesión.')})
+            } else {
+                set(state => ({
+                    loading: false, 
+                    error: error,
+                    data: state.data // mantener los datos anteriores
+                }))
+            }
         }
     },
 

@@ -3,6 +3,7 @@ import { EstablishmentsContainer, EstablishmentCard } from '../components/index'
 import { Row, Col } from 'antd'
 
 export default function OwnersDashboard() {
+  
   return (
     <div>
       <EstablishmentsContainer>

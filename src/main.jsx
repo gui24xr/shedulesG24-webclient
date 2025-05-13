@@ -4,6 +4,7 @@ import { Auth0Provider } from "@auth0/auth0-react";
 import App from "./App.jsx";
 import { BrowserRouter } from "react-router-dom";
 
+
 const AUTH0_DOMAIN = import.meta.env.VITE_AUTH0_DOMAIN;
 const AUTH0_CLIENT_ID = import.meta.env.VITE_AUTH0_CLIENT_ID;
 const AUTH0_CACHE_LOCATION = import.meta.env.VITE_AUTH0_CACHE_LOCATION;
@@ -20,6 +21,8 @@ const auth0ConfigValues = {
 };
 
 
+
+
 createRoot(document.getElementById("root")).render(
   <BrowserRouter>
     <Auth0Provider
@@ -27,7 +30,7 @@ createRoot(document.getElementById("root")).render(
       clientId={auth0ConfigValues.clientId}
       cacheLocation="localstorage" // o "memory" para que no persista entre recargas
       authorizationParams={{
-        redirect_uri: window.location.origin, // 👈 vuelve al path exacto
+        redirect_uri: window.location.origin + '/login', // 👈 vuelve al path exacto
         audience: auth0ConfigValues.authorizationParams.audience,
       }}
     >

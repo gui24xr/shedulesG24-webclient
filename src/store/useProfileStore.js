@@ -2,17 +2,19 @@ import { create } from "zustand";
 import apiClient from "../libs/apiclient";
 import { platformService } from "../services";
 
+
+//Guillermo 
 const useProfileStore = create((set, get) => ({
   isAutenticated: false,
   currentUser: null,
   loading: false,
   error: null,
 
-  loginOwnerInServer: async ({ auth0Token, onSuccess, onFailure }) => {
+
+  loginOwnerInServerAndSetProfile: async ({ auth0Token, onSuccess, onFailure }) => {
     set({ loading: true })
     try {
-      await platformService.owners.loginOrRegisterOwner(auth0Token)
-      const profileData = await platformService.owners.getProfile()
+      const profileData = await platformService.owners.loginOrRegisterOwner(auth0Token)
       set({
         isAutenticated: true,
         currentUser: { ...profileData },
@@ -29,9 +31,38 @@ const useProfileStore = create((set, get) => ({
     }
   },
 
+
+  checkSessionInServerAndSetProfile: async ({ onSuccess, onFailure }) => {
+    console.log("setProfileStore")
+    set({ loading: true })
+    try {
+      const profileData = await platformService.owners.checkSessionInServer()
+      set({
+        isAutenticated: true,
+        currentUser: { ...profileData },
+        loading: false
+      })
+      if (onSuccess) onSuccess()
+    } catch (error) {
+      //Aca tengo que manejar los estados de error de no auth, expired, etc
+      console.debug('No hay un refresh token valido...');
+      set({ loading: false })
+      if (onFailure) onFailure()
+    }
+    finally {
+      set({ loading: false })
+    }
+  },
+
   logoutOwnerInServer: async ({ onSuccess, onFailure }) => {
+    set({ loading: true })
     try {
       await platformService.owners.logout()
+      set({
+        isAutenticated: false,
+        currentUser: null,
+        loading: false
+      })
       if (onSuccess) onSuccess()
     } catch (error) {
       console.error(error);
@@ -43,6 +74,7 @@ const useProfileStore = create((set, get) => ({
     }
   },
 
+  //Esta funcion se ira al owners store que se encarga de las peticiones de owners
   updateOwnerDataInserver: async ({ data, onSuccess, onFailure }) => {
     try {
       set({ loading: true })
@@ -68,30 +100,6 @@ const useProfileStore = create((set, get) => ({
     }
   },
 
-  logoutUserInStoreAndServer: async ({ onSuccess }) => {
-    //const response = await apiClient.post("/api/auth/logout", { });
-
-    set({
-      currentUser: null
-    })
-    if (onSuccess) onSuccess()
-    return;
-  },
-
-  logoutUser: () => {
-    return { set: { isAutenticated: false, currentUser: null } }
-  },
-
-  createCompany: async (data) => {
-    try {
-      const response = await apiClient.post("/api/companies", { ...data });
-
-      console.log("Respuesta: ", response.data);
-      return;
-    } catch (error) {
-      console.error(error);
-    }
-  },
 }));
 
 export default useProfileStore;

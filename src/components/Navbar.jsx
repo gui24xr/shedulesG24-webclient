@@ -1,19 +1,14 @@
 import React from 'react';
 import styles from './styles/NavBar.module.css'; 
-import { useAuth0 } from '@auth0/auth0-react';
 import { useProfileStore } from '../store/index';
 import { Button } from 'antd';
-import { LogoutWrapper } from './index';
+import { useNavigate } from 'react-router-dom';
 
 const NavBar = () => {
-    
+    const navigate = useNavigate()
       const currentUser = useProfileStore((state) => state.currentUser)
-      const { loginWithRedirect} = useAuth0();
-   
-      const loginAsOwner = () => {
-        loginWithRedirect();
-      };
-      
+      const isAuthenticated = useProfileStore((state) => state.isAutenticated)
+          
    
     return (
         <nav className={styles.navbar}>
@@ -21,19 +16,17 @@ const NavBar = () => {
                 <h1>Mi App</h1>
             </div>
             <div className={styles.menu}>
-                {currentUser ? (
+                {isAuthenticated ? (
                     <>
                         <span className={styles.userEmail}>{currentUser.email}</span>
-                       <LogoutWrapper>
-                         {(showConfirm) => (
-                            <Button type="primary" danger onClick={showConfirm}>Logout</Button>
-                         )}
-                       </LogoutWrapper>
+                      
+                            <Button type="primary" danger onClick={() => navigate('/logout')}>Logout</Button>
+                       
                         
                     </>
                 ) : (
                     <>
-                         <button className={styles.loginButton} onClick={loginAsOwner}>
+                         <button className={styles.loginButton} onClick={() => navigate('/login')}>
                             Login as Owner
                         </button>
                        

@@ -11,6 +11,10 @@ import EstablishmentsContainer from "./EstablishmentsContainer";
 import EstablishmentCard from "./EstablishmentCard";
 import EstablishmentDetailContainer from "./EstablishmentDetailContainer";
 import EstablishmentDetail from "./EstablishmentDetail";
+
+import LoginHandler from "./LoginHandler";
+import LogoutHandler from "./LogoutHandler";
+
 export {
      NavBar,
      OwnerProfileForm,
@@ -24,5 +28,7 @@ export {
      EstablishmentsContainer,
      EstablishmentCard,
      EstablishmentDetailContainer,
-     EstablishmentDetail
+     EstablishmentDetail,
+     LoginHandler,
+     LogoutHandler
 }

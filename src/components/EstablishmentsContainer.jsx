@@ -22,7 +22,7 @@ export default function EstablishmentsContainer({children}) {
 
     if (loading) return <Spin/>
     if (error) return <Alert message="Error al cargar los establecimientos" type="error" />
-    
+    if (!items) return <Alert message="No hay establecimientos disponibles" type="info" />
     return children({
       items, 
       handlers: {handleRedirect}

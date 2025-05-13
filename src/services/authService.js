@@ -16,7 +16,7 @@ export const authService = {
         return data
     },
 
-    asyncupdateOwnerProfile(data){
+    async updateOwnerProfile(data){
         const {data} = await apiClient.put(`${API_URL}/api/owners`, data)
         return data
     },

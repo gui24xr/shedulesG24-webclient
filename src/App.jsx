@@ -1,46 +1,28 @@
 import "./App.css";
+import { loglevel } from "./libs/index.js";
 import { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import { HomeLayout, EstablishmentsDashboardLayout, OwnersDashboardLayout } from "./layouts/index.js";
 import { HomeIndex, OwnersDashboard, EstablishmentsDashboardIndex } from "./pages/index.js";
-import { useAuth0 } from "@auth0/auth0-react";
+import { LoginHandler, LogoutHandler } from "./components/index.js";
 import { useProfileStore } from "./store/index.js";
-import { useNavigate } from "react-router-dom";
+import { Spin } from 'antd';
+
 
 function App() {
+  const checkSessionInServerAndSetProfile = useProfileStore(state => state.checkSessionInServerAndSetProfile)
+  const isAutenticated = useProfileStore(state => state.isAutenticated)
+  const loading = useProfileStore(state => state.loading)
+  const error = useProfileStore(state => state.error)
 
+  useEffect(() => {
+    //console.log('Cargando App ', Date.now())
+    !isAutenticated && checkSessionInServerAndSetProfile({})
+  }, [])
 
-  const {user, getAccessTokenSilently,logout} = useAuth0()
-  const {loginOwnerInServer} = useProfileStore()
-  const navigate = useNavigate()
+  if(loading) return <Spin />
+  if(error) return <div>Error: {error.message}</div>
 
-  useEffect(()=>{
-   
-  const setProfileStore = async (loggedUser) =>{
-    try{
-      if (!loggedUser) return ()=>{console.log("No hay usuario")}
-
-      const auth0Token = await getAccessTokenSilently()
-      console.log(auth0Token)
-      loginOwnerInServer({
-        auth0Token: auth0Token,
-        onSuccess: () => {
-          console.log("Usuario logueado")
-          navigate("/owners")
-        },
-        onFailure: () => {
-          alert("Error al loguear")
-          logout()
-        }
-      
-      })
-    }catch(error){
-      console.log(error)
-    }
-  }
-
-   setProfileStore(user)
-  },[user])
   return (
     <>
       <Routes>
@@ -48,8 +30,12 @@ function App() {
         <Route path="/" element={<HomeLayout />}>
           <Route index element={<HomeIndex />} />
         </Route>
-        
-        
+
+        {/* handlelogin */}
+        <Route path="/login" element={<LoginHandler />} />
+        <Route path="/logout" element={<LogoutHandler />} />
+   
+
         {/* Owners Dashboard */}
         <Route path="/owners" element={<OwnersDashboardLayout />}>
           <Route index element={<OwnersDashboard />} />
@@ -66,8 +52,6 @@ function App() {
           <Route path="establishment/new" element={<h1>New Establishment</h1>} />
         </Route>
 
-       
-       
       </Routes>
     </>
   );
