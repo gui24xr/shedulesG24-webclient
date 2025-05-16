@@ -14,8 +14,6 @@ export default function LogoutHandler() {
   const { logout:logoutInClient } = useAuth0()
 
 
-
-
   const onOkConfirmLogout = () =>{
     logoutOwnerInServer({
       onSuccess: () => {
