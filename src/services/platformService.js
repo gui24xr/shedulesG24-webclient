@@ -1,6 +1,6 @@
 import { apiClient } from "../libs/index"
 import loglevel from "../libs/loglevel"
-
+import { RefreshTokenExpiredError } from "./errors"
 
 async function _makeRequestWithAccessToken(requestFn){
     try{
@@ -19,6 +19,8 @@ async function _makeRequestWithAccessToken(requestFn){
             }catch(error){
                 if (error.response?.status === 401){
                     loglevel.error("Aca el refresh estan vencido y deberia cerrar la sesion: ", error)
+                    window.location.href = "/logout"
+                    throw new RefreshTokenExpiredError()
                 }
                 throw error;
             }    

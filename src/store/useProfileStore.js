@@ -11,7 +11,7 @@ const useProfileStore = create((set, get) => ({
   error: null,
 
 
-  loginOwnerInServerAndSetProfile: async ({ auth0Token, onSuccess, onFailure }) => {
+  loginOwnerInServerAndSetProfile: async ({ auth0Token, deleteAuth0TokenFunction,onSuccess, onFailure }) => {
     set({ loading: true })
     try {
       const profileData = await platformService.owners.loginOrRegisterOwner(auth0Token)
@@ -28,6 +28,7 @@ const useProfileStore = create((set, get) => ({
     }
     finally {
       set({ loading: false })
+      if (deleteAuth0TokenFunction) deleteAuth0TokenFunction()
     }
   },
 

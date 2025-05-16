@@ -1,6 +1,6 @@
 import { create } from 'zustand'
 import { platformService } from '../services/index'
-import { PlatformServiceError } from '../services/errors/PlatformServiceError'
+
 
 
 //ESTABLISHMENTS STORE guillermo

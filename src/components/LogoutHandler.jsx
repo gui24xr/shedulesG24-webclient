@@ -4,21 +4,17 @@ import { useProfileStore } from "../store/index.js"
 import { useNavigate } from "react-router-dom";
 import { Modal } from 'antd'
 import { ExclamationCircleOutlined } from '@ant-design/icons';
-import { useAuth0 } from '@auth0/auth0-react'
 
 export default function LogoutHandler() {
-
+  
   const logoutOwnerInServer = useProfileStore((state) => state.logoutOwnerInServer)
   const isLoading = useProfileStore((state) => state.isLoading)
   const isAuthenticated = useProfileStore((state) => state.isAutenticated)
-  const { logout:logoutInClient } = useAuth0()
+  const navigate = useNavigate()
 
-
-  const onOkConfirmLogout = () =>{
+  const cleanSession = () =>{
     logoutOwnerInServer({
-      onSuccess: () => {
-          logoutInClient()
-      },
+      onSuccess: () =>  navigate("/"),
       onFailure: () => {
           console.error("Error al cerrar sesión")
       }
@@ -31,23 +27,15 @@ export default function LogoutHandler() {
       content: 'Esta acción cerrará tu sesión actual.',
       okText: 'Sí, cerrar sesión',
       cancelText: 'Cancelar',
-      onOk: onOkConfirmLogout,
+      onOk: cleanSession,
   });
   }
 
-
-
   useEffect(() => {
-    if (isLoading || !isAuthenticated) return;
-      
-    if (!isAuthenticated) {
-      logoutInClient()
-      return navigate("/")
-    }
-    
-    return checkConfirmLogout()
-  }, [isLoading, isAuthenticated]);
-  
+    if (isAuthenticated) return checkConfirmLogout()
+    return cleanSession()
+  }, []);
 
-    return null
+  if (isLoading) return <Spin />
+  return null
 }

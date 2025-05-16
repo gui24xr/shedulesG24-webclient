@@ -7,19 +7,26 @@ import { Spin } from 'antd';
 
   export default function LoginHandler() {
     
-    const {user:auth0User, getAccessTokenSilently,isLoading:isLoadingAuth0, isAuthenticated, loginWithRedirect} = useAuth0()
+    const {getAccessTokenSilently,isLoading:isLoadingAuth0, isAuthenticated:existAuth0Token, loginWithRedirect,logout:deleteAuth0Token} = useAuth0()
     const loginOwnerInServerAndSetProfile = useProfileStore(state => state.loginOwnerInServerAndSetProfile)
+    const isAutenticatedInServer = useProfileStore(state => state.isAutenticated)
     const navigate = useNavigate()
   
-    const getAuth0TokenAndLoginInServer = async () => {
+    const loginInServerUsingAuth0Token = async () => {
       try {
         const auth0Token = await getAccessTokenSilently();
-        loglevel.debug("auth0Token",auth0Token);
+        loglevel.debug("Se obtuvo el auth0Token",auth0Token);
         
         loginOwnerInServerAndSetProfile({
           auth0Token:auth0Token,
+          deleteAuth0TokenFunction:()  =>deleteAuth0Token({ 
+            logoutParams: {
+                localOnly: true 
+            }
+        }),
           onSuccess: () => {
             loglevel.debug("Usuario logueado");
+            
             navigate("/");
           },
           onFailure: () => {
@@ -29,26 +36,18 @@ import { Spin } from 'antd';
         });
       } catch (error) {
         console.error(error);
-        alert("Error al iniciar sesión 3");
-        navigate('/logout')
+        alert("Error al intentar obtener el token de Auth0");
+        return navigate('/')
       }
     };
 
-
   useEffect(() => {
     if (isLoadingAuth0) return;
-    if (!isAuthenticated && !auth0User) {
-      console.log("Antes de hacer login with redirecct")
-      loginWithRedirect()
-    }
-
-    
-    console.log("Antes de obtener token de auth0")
-    getAuth0TokenAndLoginInServer();
-  }, [isLoadingAuth0,isAuthenticated ]);
-  
+    if (isAutenticatedInServer) return navigate("/");
+    if (!existAuth0Token) return loginWithRedirect();
+    loginInServerUsingAuth0Token()
+  }, [isLoadingAuth0]);
 
   if (isLoadingAuth0) return <Spin />
-  
   return null
 }
