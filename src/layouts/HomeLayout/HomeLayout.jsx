@@ -8,15 +8,11 @@ import { useNavigate } from "react-router-dom";
 const { Content, Header } = Layout;
 
 export default function HomeLayout() {
-
   const isAutenticated = useProfileStore(state => state.isAutenticated)
-  
   const navigate = useNavigate()
   
   useEffect(()=>{
-    
     if(isAutenticated) return navigate("/owners")
-    
   },[isAutenticated])
 
   return (

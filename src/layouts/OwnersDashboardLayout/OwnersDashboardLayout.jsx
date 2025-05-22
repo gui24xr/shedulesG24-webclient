@@ -29,8 +29,8 @@ export default function OwnersDashboardLayout() {
            
             <Layout >
                 <NavBar />
-                <Content >
-                    <Outlet />
+                <Content style={{ padding: '24px', minHeight: 280, backgroundColor: 'white', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+                    <Outlet/>
                 </Content>
             </Layout>
         </Layout>

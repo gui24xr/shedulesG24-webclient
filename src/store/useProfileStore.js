@@ -38,9 +38,10 @@ const useProfileStore = create((set, get) => ({
     set({ loading: true })
     try {
       const profileData = await platformService.owners.checkSessionInServer()
+      console.log("profileData", profileData.profile)
       set({
         isAutenticated: true,
-        currentUser: { ...profileData },
+        currentUser: { ...profileData.profile },
         loading: false
       })
       if (onSuccess) onSuccess()
@@ -77,28 +78,18 @@ const useProfileStore = create((set, get) => ({
 
   //Esta funcion se ira al owners store que se encarga de las peticiones de owners
   updateOwnerDataInserver: async ({ data, onSuccess, onFailure }) => {
+    set({ loading: true })
     try {
-      set({ loading: true })
-      const response = await apiClient.put("/api/owners", { ...data });
-      console.log("Respuesta en store update owner: ", response.data);
-      set({ loading: false, ownerStatus: response.data.status })
-      if (onSuccess) {
-
-        const updatedUserData = await apiClient.get("/api/owners")
-        console.log("Respuesta en store update owner: ", updatedUserData.data);
-        set({ currentUser: updatedUserData.data })
-        onSuccess()
-      }
-
-      return;
+      const updatedUser = await platformService.owners.updateProfile(data);
+      console.log("Respuesta en store update owner: ", updatedUser);
+      set({ loading: false, currentUser: { ...updatedUser } })
+      if (onSuccess) return onSuccess()
     } catch (error) {
       console.error(error);
       set({ loading: false, error: error })
-      if (onFailure) onFailure()
+      if (onFailure) return onFailure()
     }
-    finally {
-      set({ loading: false })
-    }
+  
   },
 
 }));

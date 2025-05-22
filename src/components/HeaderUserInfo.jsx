@@ -2,13 +2,15 @@ import React from 'react'
 import { Card, Row, Col, Avatar, Space, Typography, Button } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 import styles from './styles/Dashboard.module.css'      
-    import { NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
+import { useProfileStore } from '../store/index';
 
 const { Title, Text } = Typography;
 
-const HeaderUserInfo = ({currentUser}) => {
+const HeaderUserInfo = () => {
     
-console.log(currentUser)
+const currentUser = useProfileStore(state => state.currentUser)
+
 return (
     <Card className={styles.headerCard}>
         <Row align="middle" gutter={16}>
@@ -25,7 +27,7 @@ return (
                     {
                         currentUser?.status == 'pendingData' 
                         ? 
-                        <NavLink to='/dashboard/profile'>
+                        <NavLink to='/owners/profile'>
                             <Button type='primary'>Completar datos</Button> 
                         </NavLink> 
                         : 

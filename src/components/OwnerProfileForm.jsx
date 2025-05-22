@@ -1,73 +1,86 @@
 import React, {useEffect, useState} from 'react';
-import { useForm } from 'react-hook-form';
-import styles from './styles/Forms.module.css'; 
-import apiClient from '../libs/apiclient';
-import useProfileStore from '../store/useProfileStore';
-import { useNavigate } from 'react-router-dom';
 
+import { useProfileStore } from '../store/index';
+import { useNavigate } from 'react-router-dom';
+import { Form, Input, Button, message, Avatar, Space, Typography, Card, Divider } from 'antd';
+
+const { Text } = Typography;
 export const OwnerProfileForm = () => {
     const navigate = useNavigate();
-    const [ownerData, setOwnerData] = useState(null);
-    const {updateOwnerDataInserver} = useProfileStore()
-    const { register, handleSubmit, reset } = useForm();
+    //const currentProfile = useProfileStore(state => state.currentUser)
+
+    const currentProfile = useProfileStore(state => state.currentUser)
+    const updateOwnerData = useProfileStore(state => state.updateOwnerDataInserver)
+
+    const [form] = Form.useForm()
+    const onFinish = (values) => {
+      console.log(values)
+      updateOwnerData({data: values, onSuccess: () => {
+        message.success('Datos actualizados correctamente')
+      }, onFailure: () => {
+        message.error('Error al actualizar los datos')
+      }})
+    }
 
 
-    useEffect(() => {
-        const fetchData = async () => {
-          try {
-            const response = await apiClient.get('http://localhost:8081/api/owners');
-            console.log(response.data); // Para ver en consola
-            setOwnerData(response.data); // Guardás los datos en el state
-          } catch (error) {
-            console.error('Error al obtener los datos de los owners:', error);
-          }
-        };
-      
-        fetchData();
-      }, []);
-
-      useEffect(() => {
-        if (ownerData) {
-            reset({
-                firstName: ownerData.firstName || '',
-                lastName: ownerData.lastName || '',
-                phoneNumber: ownerData.phoneNumber || ''
-            });
-        }
-    }, [ownerData, reset]);
-
- 
-
-    const onSubmit = handleSubmit(data => {
-        console.log('Data en componente: ', data)
-        updateOwnerDataInserver({data, onSuccess: () => {
-            alert('Datos actualizados correctamente')
-            navigate('/dashboard')
-        }, onFailure: () => {
-            alert('Error al actualizar los datos')
-        }})
-      })
+    
 
     return (
-      <form onSubmit={onSubmit} className={styles.forms}>
-          <h1>Ingresar tus datos personales...</h1>
-          <label>Nombre:</label>
-          <input type="text" name="firstName" 
-          {...register('firstName')}
-          />
+      <Card title="Datos de perfil">
+      <Form
+      form={form}
+      name="formulario_basico"
+      layout="inline"
+      sp
+      onFinish={onFinish}
+      initialValues={{
+        firstName: currentProfile?.firstName || null,
+        lastName: currentProfile?.lastName || null,
+        phoneNumber: currentProfile?.phoneNumber || null,
+      }}
+    >
+       
+      <Space direction="vertical" size={16} align="center">
+        <Form.Item
+        label="Nombre" name="firstName"
+        rules={[
+            { required: true, message: 'Por favor ingresa tu nombre' },
+          ]}>
+          <Input placeholder="Ingresa tu nombre" />
+        </Form.Item>
 
-          <label>Apellido:</label>
-          <input type="text" name="lastName" 
-          {...register('lastName')}
-          />
+        <Form.Item
+        label="Apellido" name="lastName"
+        rules={[
+            { required: true, message: 'Por favor ingresa tu apellido' },
+          ]}>
+          <Input placeholder="Ingresa tu nombre" />
+        </Form.Item>
 
-          <label>Telefono:</label>
-          <input type="text" name="phoneNumber" 
-          {...register('phoneNumber')}
-          />
-    
-        <button type="submit">Enviar</button>
-      </form>
+        <Divider />
+
+        <Form.Item
+        label="Telefono" name="phoneNumber"
+        rules={[
+            { required: true, message: 'Por favor ingresa tu telefono' },
+          ]}>
+          <Input placeholder="Ingresa tu telefono" />
+        </Form.Item>
+
+      
+        <Space direction="vertical" size={16} align="center">
+            <Avatar src={currentProfile?.avatar} size={100} />
+            <Text>Foto de perfil</Text>
+        </Space>
+       
+        <Form.Item >
+          <Button type="primary" htmlType="submit">
+            Enviar
+          </Button>
+        </Form.Item>
+      </Space>
+      </Form>
+      </Card>
     );
   }
   

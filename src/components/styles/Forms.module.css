@@ -125,3 +125,36 @@
         padding: 0.85rem;
     }
 }
+
+.formContainer {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.formItem {
+  margin-bottom: 1.5rem;
+}
+
+.formItem :global(.ant-form-item-label) {
+  font-weight: 500;
+}
+
+.formItem :global(.ant-input) {
+  padding: 0.5rem;
+  border-radius: 4px;
+}
+
+.avatarContainer {
+  text-align: center;
+  margin: 2rem 0;
+}
+
+.submitButton {
+  margin-top: 1rem;
+  width: 100%;
+  max-width: 200px;
+}

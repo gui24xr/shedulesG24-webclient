@@ -5,7 +5,7 @@ import AddressForm from "./AddressForm";
 import RapidActionsPanel from "./RapidActionsPanel";
 import RapidStaticsPanel from "./RapidStaticsPanel";
 import DashboardHome from "./DashboardHome";
-import CreateEstablishment from "./CreateEstablishment";
+import CreateEstablishmentForm from "./CreateEstablishmentForm";
 import LogoutWrapper from "./LogoutWrapper";
 import EstablishmentsContainer from "./EstablishmentsContainer";
 import EstablishmentCard from "./EstablishmentCard";
@@ -23,7 +23,7 @@ export {
      RapidActionsPanel,
      RapidStaticsPanel,
      DashboardHome,
-     CreateEstablishment,
+     CreateEstablishmentForm,
      LogoutWrapper,
      EstablishmentsContainer,
      EstablishmentCard,

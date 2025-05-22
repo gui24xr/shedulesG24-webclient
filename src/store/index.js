@@ -1,8 +1,8 @@
 import useProfileStore from "./useProfileStore";
-import useCatalogsStore from "./useCatalogsStore";
+import useMetadataStore from "./useMetadataStore";
 import useEstablishmentsStore from "./useEstablishmentsStore";
 export {
     useProfileStore,
-    useCatalogsStore,
+    useMetadataStore,
     useEstablishmentsStore
 }

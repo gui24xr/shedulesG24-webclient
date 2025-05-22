@@ -1,11 +1,12 @@
 import React from 'react'
-import { EstablishmentsContainer, EstablishmentCard } from '../components/index'
+import { EstablishmentsContainer, EstablishmentCard, HeaderUserInfo } from '../components/index'
 import { Row, Col } from 'antd'
 
 export default function OwnersDashboard() {
   
   return (
-    <div>
+    <div> 
+      <HeaderUserInfo />
       <EstablishmentsContainer>
         {({items}) => (
           <Row gutter={[16, 16]}>
